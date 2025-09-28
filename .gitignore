@@ -1,0 +1,76 @@
+# ==============================
+# Python bytecode / compiled
+# ==============================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# ==============================
+# Distribution / packaging
+# ==============================
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# ==============================
+# Virtual environments
+# ==============================
+venv/
+env/
+ENV/
+.env/
+
+# ==============================
+# IDE / editor configs
+# ==============================
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# ==============================
+# Logs and temp files
+# ==============================
+*.log
+.DS_Store
+Thumbs.db
+
+# ==============================
+# Jupyter Notebook
+# ==============================
+.ipynb_checkpoints/
+
+# ==============================
+# Coverage / testing
+# ==============================
+htmlcov/
+.coverage
+
+# ==============================
+# Dependency management
+# ==============================
+Pipfile.lock
+poetry.lock
