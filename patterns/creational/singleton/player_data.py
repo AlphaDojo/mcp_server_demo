@@ -7,10 +7,8 @@ class PlayerDataManager:
     _lock = threading.Lock()
     
     def __new__(cls):
-        # First check (without locking)
         if cls._instance is None:
             with cls._lock:
-                # Second check (with locking)
                 if cls._instance is None:
                     cls._instance = super().__new__(cls)
                     cls._instance._load_data()
@@ -18,7 +16,7 @@ class PlayerDataManager:
         return cls._instance
     
     def _load_data(self):
-        # In a real app this might load from a DB or JSON file
+        # change to connect to db lateer
         self.player_data = {
             "Mike Trout": {"home_runs": 35, "batting_average": 0.312, "RBIs": 88, "stolen_bases": 15},
             "Shohei Ohtani": {"home_runs": 44, "batting_average": 0.285, "RBIs": 95, "stolen_bases": 12},

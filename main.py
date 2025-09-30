@@ -1,5 +1,6 @@
 from mcp.server.fastmcp import FastMCP
-from patterns.creational.singleton import PlayerDataManager
+from .patterns.creational.singleton.player_data import PlayerDataManager
+from .patterns.creational.factory.player_report_factory import DynamicReportFactory
 
 # Create an MCP server
 mcp = FastMCP("Demo")
@@ -17,12 +18,13 @@ def get_player_stat_tool(player_name: str, stat: str) -> str:
     return str(manager.get_player_stat(player_name, stat))
 
 
-# Add a dynamic greeting resource
-@mcp.resource("greeting://{name}")
-def get_greeting(name: str) -> str:
-    """Get a personalized greeting"""
-    return f"Hello, {name}!"
+@mcp.tool()
+def get_player_report(player_name: str, report_type: str) -> str:
+    """Return the specified report for the given player (e.g. summary, detailed, stats-only)"""
+    factory = DynamicReportFactory()
+    report_instance =  factory.generate_report(player_name, report_type)
 
+    return report_instance.generate()
 
 # Add a prompt
 @mcp.prompt()
