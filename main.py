@@ -1,6 +1,8 @@
 from mcp.server.fastmcp import FastMCP
 from .patterns.creational.singleton.player_data import PlayerDataManager
 from .patterns.creational.factory.player_report_factory import DynamicReportFactory
+from .patterns.structural.adapter.legacy_scoreboard import LegacyScoreboard
+from .patterns.structural.adapter.new_scoreboard import ScoreboardAdapter
 
 # Create an MCP server
 mcp = FastMCP("Demo")
@@ -26,14 +28,9 @@ def get_player_report(player_name: str, report_type: str) -> str:
 
     return report_instance.generate()
 
-# Add a prompt
-@mcp.prompt()
-def greet_user(name: str, style: str = "friendly") -> str:
-    """Generate a greeting prompt"""
-    styles = {
-        "friendly": "Please write a warm, friendly greeting",
-        "formal": "Please write a formal, professional greeting",
-        "casual": "Please write a casual, relaxed greeting",
-    }
+@mcp.tool()
+def get_scoreboard(home: str, away: str, home_runs: int, away_runs: int, innings: int) -> str:
+    legacy = LegacyScoreboard()
+    adapter = ScoreboardAdapter(legacy)
 
-    return f"{styles.get(style, styles['friendly'])} for someone named {name}."
+    return adapter.display_score(home, away, home_runs, away_runs, innings)
