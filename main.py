@@ -1,8 +1,8 @@
 from mcp.server.fastmcp import FastMCP
-from .patterns.creational.singleton.player_data import PlayerDataManager
-from .patterns.creational.factory.player_report_factory import DynamicReportFactory
-from .patterns.structural.adapter.legacy_scoreboard import LegacyScoreboard
-from .patterns.structural.adapter.new_scoreboard import ScoreboardAdapter
+from patterns.creational.singleton.player_data import PlayerDataManager
+from patterns.creational.factory.player_report_factory import DynamicReportFactory
+from patterns.structural.adapter.legacy_scoreboard import LegacyScoreboard
+from patterns.structural.adapter.new_scoreboard import ScoreboardAdapter
 
 # Create an MCP server
 mcp = FastMCP("Demo")
@@ -15,7 +15,7 @@ def add(a: int, b: int) -> int:
     return a + b
 
 @mcp.tool()
-def get_player_stat_tool(player_name: str, stat: str) -> str:
+def get_player_stat(player_name: str, stat: str) -> str:
     """Return the specified stat for the given player (e.g., batting_average, home_runs)"""
     return str(manager.get_player_stat(player_name, stat))
 

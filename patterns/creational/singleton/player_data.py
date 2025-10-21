@@ -1,4 +1,5 @@
 import threading
+import util
 
 class PlayerDataManager:
     """Double-checked locking singleton pattern"""
@@ -12,11 +13,11 @@ class PlayerDataManager:
                 if cls._instance is None:
                     cls._instance = super().__new__(cls)
                     cls._instance._load_data()
-                    print("DoubleCheckedSingleton instance created")
+                    print(util.double_checked_singleton)
         return cls._instance
     
     def _load_data(self):
-        # change to connect to db lateer
+        # change to connect to db later
         self.player_data = {
             "Mike Trout": {"home_runs": 35, "batting_average": 0.312, "RBIs": 88, "stolen_bases": 15},
             "Shohei Ohtani": {"home_runs": 44, "batting_average": 0.285, "RBIs": 95, "stolen_bases": 12},
@@ -29,7 +30,11 @@ class PlayerDataManager:
             "Vladimir Guerrero Jr.": {"home_runs": 40, "batting_average": 0.309, "RBIs": 110, "stolen_bases": 2},
             "Trea Turner": {"home_runs": 21, "batting_average": 0.287, "RBIs": 68, "stolen_bases": 32},
         }
-        print("Player data loaded")
 
     def get_player_stat(self, player_name, stat):
-        return self.player_data.get(player_name, {}).get(stat, "Stat not found")
+        
+        for name, stats in self.player_data.items():
+            print(player_name)
+            if name.lower() == player_name.lower():
+                return stats.get(stat, util.stat_not_found)
+        return util.player_not_found
